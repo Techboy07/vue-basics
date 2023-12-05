@@ -1,17 +1,78 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/vue@3.0.2"></script>
     <title>Document</title>
-</head>
-<body>
-    hello vue :)
-<div id="app">
-   
 
-</div>
+    <style>
+      body {
+        background: #eee;
+        max-width: 960px;
+        margin: 20px auto;
+        padding: 30px;
+      }
+      p,
+      h3,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        list-style-type: none;
+        background: #fff;
+        margin: 20px auto;
+        padding: 10px 20px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      li.fav {
+        background: #ff9ed2;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    hello vue :)
+    <div id="app">
+      <!-- attribute binding -->
+      <a v-bind:href="url" target="blank">the best website ever</a>
+
+      <button @click="toggleShowBooks">
+        <span v-if="showBooks">Hide Books</span>
+        <span v-else>Show Books</span>
+      </button>
+      <button @click="age--">Decrease Age</button>
+      <div @click="changeTitle">change</div>
+
+      <div v-if="showBooks">
+        <ul>
+          <li
+            v-for="book in books"
+            v-bind:class="{fav: book.isFav}"
+            @click="toggleFav($event, book)"
+          >
+            <h3>{{book.title}}</h3>
+            <p>{{book.author}}</p>
+          </li>
+        </ul>
+      </div>
+
+      <h3>My Favourites</h3>
+      <ul>
+        <li
+          v-for="book in filteredFavs"
+          v-bind:class="{fav: book.isFav}"
+          @click="toggleFav($event, book)"
+        >
+          <h3>{{book.title}}</h3>
+          <p>{{book.author}}</p>
+        </li>
+      </ul>
+    </div>
 
     <script src="./app.js"></script>
-</body>
+  </body>
 </html>
